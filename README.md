@@ -61,3 +61,23 @@ Connect your I2C FRAM/EEPROM module to your ESP32-C3 as follows:
 
 ```cpp
 #include "I2CMiniPrefs.h"
+```
+
+### Constructor
+
+Initialize the `I2CMiniPrefs` object:
+
+```cpp
+I2CMiniPrefs myPrefs(MemoryType memType, uint8_t i2cAddr,
+                     uint32_t totalMemoryBits, uint16_t blockSize,
+                     uint8_t maxKeyLen, uint16_t maxValueLen,
+                     int8_t sdaPin = -1, int8_t sclPin = -1);
+```
+
+* **`memType`:** `MEM_TYPE_FRAM` or `MEM_TYPE_EEPROM`. Use MEM_TYPE_FRAM for FRAM chips.
+* **`i2cAddr`:** The I2C address of your memory chip (e.g., `0x50`).
+* **`totalMemoryBits`:** Total size of the memory chip in bits (e.g., `256 * 1024` for a 256 Kbit FRAM).
+* **`blockSize`:** Size of each memory block in bytes. This affects wear-leveling and garbage collection efficiency. A good starting point is 128 or 256.
+* **`maxKeyLen`:** Maximum length of key strings (excluding null terminator).
+* **`maxValueLen`:** Maximum length of value data in bytes.
+* **`sdaPin, sclPin`:** (Optional) Custom SDA and SCL pins. Use -1 for board default pins.
