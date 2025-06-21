@@ -14,6 +14,9 @@ This `I2CMiniPrefs` library was developed to address this limitation by leveragi
 
 The library implements a robust **wear-leveling mechanism** and a **garbage collection (GC)** system, ensuring that data is evenly distributed across the memory and deleted entries are reclaimed efficiently. This extends the effective lifespan of the external memory chip, especially beneficial for EEPROMs and further enhancing FRAM durability.
 
+Note: see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/nvs_flash.html#
+
+
 ## ✨ Features
 
 * **External I2C Memory Support**: Designed for I2C FRAM and EEPROM chips.
