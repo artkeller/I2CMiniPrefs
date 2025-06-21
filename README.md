@@ -1,5 +1,8 @@
 # I2CMiniPrefs
 
+[![Arduino Library Manager](https://img.shields.io/static/v1?label=Arduino&message=v2.1.0&logo=arduino&logoColor=white&color=blue)](https://www.ardu-badge.com/Preferences)
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/vshymanskyy/library/Preferences.svg)](https://registry.platformio.org/packages/libraries/vshymanskyy/Preferences) 
+
 A lightweight, robust, and wear-leveling preferences library for ESP32 microcontrollers using I2C FRAM or EEPROM chips.
 
 ## 🌟 Motivation
