@@ -76,7 +76,7 @@ I2CMiniPrefs myPrefs(MemoryType memType, uint8_t i2cAddr,
 ```
 
 
-Parameters:
+#### Parameters:
 
 |Parameter	|Type	Default Value	|Example (MB85RC256V)	|Description|
 | :-------- | :----------------- |:--------------------- | :-------- |
@@ -98,7 +98,7 @@ Parameters:
 ### Example for ESP32-C3 with MB85RC256V (256Kbit FRAM):
 
 ```cpp
-// FRAM chip with custom pins (GPIO8/9)
+// FRAM chip with custom pins (GPIO4/5)
 I2CMiniPrefs myPrefs(
     MEM_TYPE_FRAM,   // Memory type
     0x50,            // I2C address
@@ -106,50 +106,30 @@ I2CMiniPrefs myPrefs(
     256,             // Block size (adjusted from 128 to avoid warning)
     8,               // Max key length (8 chars)
     120,             // Max value size (120 bytes)
-    8,               // SDA pin (GPIO8)
-    9                // SCL pin (GPIO9)
+    4,               // SDA pin (GPIO4)
+    5                // SCL pin (GPIO5)
 );
 ```
 
-Important Configuration Notes:
+#### Important Configuration Notes:
 
     Memory Size: Always specify bits (256 Kbit = 256 * 1024)
 
     Block Size:
 
-        Must be larger than ENTRY_HEADER_SIZE + maxKeyLen + maxValueLen
-
-        Typical values: 128, 256, or 512 bytes
-
-        Larger blocks = faster writes but less efficient wear-leveling
+        - Must be larger than ENTRY_HEADER_SIZE + maxKeyLen + maxValueLen
+        - Typical values: 128, 256, or 512 bytes
+        - Larger blocks = faster writes but less efficient wear-leveling
 
     Key/Value Limits:
 
-        Actual usable block space: blockSize - BLOCK_HEADER_SIZE
-
-        Max entries per block: (blockSize - BLOCK_HEADER_SIZE) / (ENTRY_HEADER_SIZE + avgKeyLen + avgValueLen)
+        - Actual usable block space: blockSize - BLOCK_HEADER_SIZE
+        - Max entries per block: (blockSize - BLOCK_HEADER_SIZE) / (ENTRY_HEADER_SIZE + avgKeyLen + avgValueLen)
 
     I2C Pins:
 
-        ESP32-C3 defaults: SDA=GPIO8, SCL=GPIO9
-
-        Custom pins override internal pull-ups - ensure external 4.7kΩ resistors
-
-
-
-
-
-
-
-
-
-* **`memType`:** `MEM_TYPE_FRAM` or `MEM_TYPE_EEPROM`. Use MEM_TYPE_FRAM for FRAM chips.
-* **`i2cAddr`:** The I2C address of your memory chip (e.g., `0x50`).
-* **`totalMemoryBits`:** Total size of the memory chip in bits (e.g., `256 * 1024` for a 256 Kbit FRAM).
-* **`blockSize`:** Size of each memory block in bytes. This affects wear-leveling and garbage collection efficiency. A good starting point is 128 or 256.
-* **`maxKeyLen`:** Maximum length of key strings (excluding null terminator).
-* **`maxValueLen`:** Maximum length of value data in bytes.
-* **`sdaPin, sclPin`:** (Optional) Custom SDA and SCL pins. Use -1 for board default pins.
+        - ESP32-C3 defaults: SDA=GPIO8, SCL=GPIO9
+        - Custom pins override internal pull-ups - ensure external 4.7kΩ resistors
 
 #### Example for ESP32-C3 with MB85RC256V (GPIO4/5):
 
