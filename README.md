@@ -211,17 +211,17 @@ While both libraries provide key-value storage, they target different use cases 
 * **`Preferences.h`:** Linear storage with namespace separation
 * **`I2CMiniPrefs`:** Block-chained structure with hash-based keys
 
-3. **Wear Management:**
+**3. Wear Management:**
 
 * **`Preferences.h`:** Relies on flash sector rotation
 * **`I2CMiniPrefs`:** Implements active block rotation + GC
 
-4. **CRC Protection:**
+**4. CRC Protection:**
 
 * **`Preferences.h`:** Basic checksum per entry
 * **`I2CMiniPrefs`:** Per-header CRC8 with hash verification
 
-##📄 License
+## 📄 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
