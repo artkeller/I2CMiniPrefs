@@ -157,8 +157,8 @@ For `getBytes`, `maxLen` is the maximum number of bytes to read into `buf`. It r
 
 #### Other Methods
 
-* `bool isKey(const char* key)`: Returns true if the key exists, false otherwise.
-* `bool remove(const char* key)`: Marks an entry as deleted. Its space will be reclaimed during the next garbage collection. Returns true on success.
-* `bool clear()`: Clears all stored preferences. This effectively formats the memory by triggering a full garbage collection and resetting the global header.
+* **`bool isKey(const char* key)`:** Returns true if the key exists, false otherwise.
+* **`bool remove(const char* key)`:** Marks an entry as deleted. Its space will be reclaimed during the next garbage collection. Returns true on success.
+* **`bool clear()`:** Clears all stored preferences. This effectively formats the memory by triggering a full garbage collection and resetting the global header.
 
 
