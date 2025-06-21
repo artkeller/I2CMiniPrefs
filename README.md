@@ -101,7 +101,7 @@ I2CMiniPrefs myPrefs(MemoryType memType, uint8_t i2cAddr,
 // FRAM chip with custom pins (GPIO4/5)
 I2CMiniPrefs myPrefs(
     MEM_TYPE_FRAM,   // Memory type
-    0x50,            // I2C address
+    0x51,            // I2C address
     256 * 1024,      // 256 Kbit memory
     256,             // Block size (adjusted from 128 to avoid warning)
     8,               // Max key length (8 chars)
