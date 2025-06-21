@@ -82,10 +82,72 @@ I2CMiniPrefs myPrefs(MemoryType memType, uint8_t i2cAddr,
 * **`maxValueLen`:** Maximum length of value data in bytes.
 * **`sdaPin, sclPin`:** (Optional) Custom SDA and SCL pins. Use -1 for board default pins.
 
-#### Example for ESP32-C3 with MB85RC256V (GPIO8/9):
+#### Example for ESP32-C3 with MB85RC256V (GPIO4/5):
 
 ```cpp
-I2CMiniPrefs myPrefs(MEM_TYPE_FRAM, 0x50, 256 * 1024, 128, 8, 120, 8, 9);
+I2CMiniPrefs myPrefs(MEM_TYPE_FRAM, 0x50, 256 * 1024, 128, 8, 120, 4, 5);
 ```
 
+#### begin()
 
+Initializes the library and memory. Call this in setup().
+
+```cpp
+bool begin();
+```
+
+Returns true on success, false otherwise. It will format the memory if the global header is invalid or missing.
+
+#### end()
+
+Optional: Releases I2C resources. Not strictly necessary if other libraries use I2C.
+
+```cpp
+void end();
+```
+
+put...() Methods (Saving Values)
+
+The put methods store key-value pairs. If the key already exists, its value is updated.
+cpp
+
+bool putBool(const char* key, bool value)
+bool putChar(const char* key, char value)
+bool putUChar(const char* key, unsigned char value)
+bool putShort(const char* key, short value)
+bool putUShort(const char* key, unsigned short value)
+bool putInt(const char* key, int value)
+bool putUInt(const char* key, unsigned int value)
+bool putLong(const char* key, long value)
+bool putULong(const char* key, unsigned long value)
+bool putLong64(const char* key, long long value)
+bool putULong64(const char* key, unsigned long long value)
+bool putFloat(const char* key, float value)
+bool putDouble(const char* key, double value)
+bool putString(const char* key, const char* value)
+bool putString(const char* key, const String& value)
+bool putBytes(const char* key, const void* buf, size_t len)
+
+Returns true if the value was successfully written, false otherwise.
+get...() Methods (Reading Values)
+
+The get methods retrieve values. If the key is not found, the defaultValue is returned.
+cpp
+
+bool getBool(const char* key, bool defaultValue = false)
+char getChar(const char* key, char defaultValue = 0)
+unsigned char getUChar(const char* key, unsigned char defaultValue = 0)
+short getShort(const char* key, short defaultValue = 0)
+unsigned short getUShort(const char* key, unsigned short defaultValue = 0)
+int getInt(const char* key, int defaultValue = 0)
+unsigned int getUInt(const char* key, unsigned int defaultValue = 0)
+long getLong(const char* key, long defaultValue = 0)
+unsigned long getULong(const char* key, unsigned long defaultValue = 0)
+long long getLong64(const char* key, long long defaultValue = 0)
+unsigned long long getULong64(const char* key, unsigned long long defaultValue = 0)
+float getFloat(const char* key, float defaultValue = 0.0f)
+double getDouble(const char* key, double defaultValue = 0.0)
+String getString(const char* key, const char* defaultValue = "")
+size_t getBytes(const char* key, void* buf, size_t maxLen)
+
+For getBytes, maxLen is the maximum number of bytes to read into buf. It returns the number of bytes read, or 0 if the key is not found.
