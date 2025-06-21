@@ -83,13 +83,13 @@ I2CMiniPrefs myPrefs(MemoryType memType, uint8_t i2cAddr,
 |memType	MemoryType	|MEM_TYPE_EEPROM	|MEM_TYPE_FRAM	|Memory technology (FRAM or EEPROM)|
 |i2cAddr	|uint8_t	0x50	|0x51	|I2C device address (usually 0x50 ... 0x57 for FRAM)|
 |totalMemoryBits	|uint32_t	32 * 1024	|256 * 1024	|Total memory size in bits (256 Kbit = 32 KB)|
-|blockSize	|uint16_t	256	|128	|Wear-leveling block size in bytes (typ. 64-512)|
+|blockSize	|uint16_t	256	|_128_ see 1)	|Wear-leveling block size in bytes (typ. 64-512)|
 |maxKeyLen	|uint8_t	16	|8	|Maximum key string length (excl. null terminator)|
 |maxValueLen	|uint16_t	240	|120	|Maximum value size in bytes|
 |sdaPin	|int8_t	-1	|4	|Custom SDA GPIO (use -1 for board default)|
 |sclPin	|int8_t	-1	|5	|Custom SCL GPIO (use -1 for board default)|
 
-#### Configuration Constraints:
+#### 1) Configuration Constraints:
 
 * **`(ENTRY_HEADER_SIZE + maxKeyLen + maxValueLen) < blockSize`**
 * For MB85RC256V: `(12 + 8 + 120) = 140 < 128` → _Warning triggered_
@@ -113,29 +113,27 @@ I2CMiniPrefs myPrefs(
 
 #### Important Configuration Notes:
 
-    Memory Size: Always specify bits (256 Kbit = 256 * 1024)
+1. **Memory Size:**
 
-    Block Size:
+   - Always specify bits (256 Kbit = 256 * 1024)
 
-        - Must be larger than ENTRY_HEADER_SIZE + maxKeyLen + maxValueLen
-        - Typical values: 128, 256, or 512 bytes
-        - Larger blocks = faster writes but less efficient wear-leveling
+2. **Block Size:**
 
-    Key/Value Limits:
+   - Must be larger than ENTRY_HEADER_SIZE + maxKeyLen + maxValueLen
+   - Typical values: 128, 256, or 512 bytes
+   - Larger blocks = faster writes but less efficient wear-leveling
 
-        - Actual usable block space: blockSize - BLOCK_HEADER_SIZE
-        - Max entries per block: (blockSize - BLOCK_HEADER_SIZE) / (ENTRY_HEADER_SIZE + avgKeyLen + avgValueLen)
+3. **Key/Value Limits:**
 
-    I2C Pins:
+   - Actual usable block space: blockSize - BLOCK_HEADER_SIZE
+   - Max entries per block: (blockSize - BLOCK_HEADER_SIZE) / (ENTRY_HEADER_SIZE + avgKeyLen + avgValueLen)
 
-        - ESP32-C3 defaults: SDA=GPIO8, SCL=GPIO9
-        - Custom pins override internal pull-ups - ensure external 4.7kΩ resistors
+4. **I2C Pins:**
 
-#### Example for ESP32-C3 with MB85RC256V (GPIO4/5):
+   - ESP32-C3 defaults: SDA=GPIO8, SCL=GPIO9
+   - Custom pins override internal pull-ups - ensure external 4.7kΩ resistors
 
-```cpp
-I2CMiniPrefs myPrefs(MEM_TYPE_FRAM, 0x50, 256 * 1024, 128, 8, 120, 4, 5);
-```
+***
 
 #### begin()
 
@@ -277,25 +275,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
 
-## ✨Key Comparison Highlights
 
-1. **Endurance & Hardware**:
-   - `Preferences.h` uses internal flash (limited writes)
-   - `I2CMiniPrefs` uses external FRAM (near-unlimited writes)
-
-2. **Wear Management**:
-   - `Preferences.h` has basic sector rotation
-   - `I2CMiniPrefs` implements advanced block rotation + garbage collection
-
-3. **Flexibility**:
-   - `Preferences.h` has fixed key/value limits
-   - `I2CMiniPrefs` offers fully configurable sizes
-
-4. **Performance**:
-   - `Preferences.h` has faster internal access
-   - `I2CMiniPrefs` with FRAM matches speed while preserving internal flash
-
-5. **Use Cases**:
-   - `Preferences.h` for static configs
-   - `I2CMiniPrefs` for high-write applications and large datasets
 
