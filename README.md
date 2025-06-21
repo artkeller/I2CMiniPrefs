@@ -182,4 +182,46 @@ While both libraries provide key-value storage, they target different use cases 
 |Custom Hardware	|❌ No	|✅ Yes (pin selection, I2C params)	|I2CMiniPrefs is hardware-flexible|
 |Library Size	|~10KB (core)	|~3KB (lightweight)	|I2CMiniPrefs has smaller footprint|
 
-When to Use Which
+#### When to Use Which
+
+**Use `Preferences.h` when:**
+
+* Storing infrequently changed configuration
+* Working with small datasets (<100KB)
+* No external hardware is available
+* Maximum write cycles < 100k
+
+**Use `I2CMiniPrefs` when:**
+
+* High write frequency is required (sensor logging, counters)
+* Using FRAM for "unlimited" write endurance
+* Need larger storage than internal flash provides
+* Projects require hardware flexibility (custom I2C pins)
+* Preserving internal flash lifespan is critical
+
+#### Key Architectural Differences
+
+**1. Storage Model:**
+
+* **`Preferences.h`:** Uses internal flash with journaling
+* **`I2CMiniPrefs`:** Uses external memory with block-based wear leveling
+
+**2. Data Structure:**
+
+* **`Preferences.h`:** Linear storage with namespace separation
+* **`I2CMiniPrefs`:** Block-chained structure with hash-based keys
+
+3. **Wear Management:**
+
+* **`Preferences.h`:** Relies on flash sector rotation
+* **`I2CMiniPrefs`:** Implements active block rotation + GC
+
+4. **CRC Protection:**
+
+* **`Preferences.h`:** Basic checksum per entry
+* **`I2CMiniPrefs`:** Per-header CRC8 with hash verification
+
+##📄 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
