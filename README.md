@@ -81,3 +81,11 @@ I2CMiniPrefs myPrefs(MemoryType memType, uint8_t i2cAddr,
 * **`maxKeyLen`:** Maximum length of key strings (excluding null terminator).
 * **`maxValueLen`:** Maximum length of value data in bytes.
 * **`sdaPin, sclPin`:** (Optional) Custom SDA and SCL pins. Use -1 for board default pins.
+
+#### Example for ESP32-C3 with MB85RC256V (GPIO8/9):
+
+```cpp
+I2CMiniPrefs myPrefs(MEM_TYPE_FRAM, 0x50, 256 * 1024, 128, 8, 120, 8, 9);
+```
+
+
