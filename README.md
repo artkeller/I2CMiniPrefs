@@ -106,11 +106,11 @@ Optional: Releases I2C resources. Not strictly necessary if other libraries use 
 void end();
 ```
 
-put...() Methods (Saving Values)
+#### put...() Methods (Saving Values)
 
-The put methods store key-value pairs. If the key already exists, its value is updated.
-cpp
+The `put` methods store key-value pairs. If the key already exists, its value is updated.
 
+```cpp
 bool putBool(const char* key, bool value)
 bool putChar(const char* key, char value)
 bool putUChar(const char* key, unsigned char value)
@@ -127,13 +127,15 @@ bool putDouble(const char* key, double value)
 bool putString(const char* key, const char* value)
 bool putString(const char* key, const String& value)
 bool putBytes(const char* key, const void* buf, size_t len)
+```
 
-Returns true if the value was successfully written, false otherwise.
-get...() Methods (Reading Values)
+Returns `true` if the value was successfully written, `false` otherwise.
 
-The get methods retrieve values. If the key is not found, the defaultValue is returned.
-cpp
+#### get...() Methods (Reading Values)
 
+The `get` methods retrieve values. If the key is not found, the `defaultValue` is returned.
+
+```cpp
 bool getBool(const char* key, bool defaultValue = false)
 char getChar(const char* key, char defaultValue = 0)
 unsigned char getUChar(const char* key, unsigned char defaultValue = 0)
@@ -149,5 +151,6 @@ float getFloat(const char* key, float defaultValue = 0.0f)
 double getDouble(const char* key, double defaultValue = 0.0)
 String getString(const char* key, const char* defaultValue = "")
 size_t getBytes(const char* key, void* buf, size_t maxLen)
+```
 
-For getBytes, maxLen is the maximum number of bytes to read into buf. It returns the number of bytes read, or 0 if the key is not found.
+For `getBytes`, `maxLen` is the maximum number of bytes to read into `buf`. It returns the number of bytes read, or 0 if the key is not found.
