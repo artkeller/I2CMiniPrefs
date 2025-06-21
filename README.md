@@ -167,19 +167,19 @@ For `getBytes`, `maxLen` is the maximum number of bytes to read into `buf`. It r
 While both libraries provide key-value storage, they target different use cases and hardware limitations. Below is a detailed comparison:
 
 | Feature |	Preferences.h (ESP32 NVS)|	I2CMiniPrefs (External I2C)|	Notes |
-| :-----: | :----------------------: | :------------------------: | :----: |
+| :------ | :----------------------- | :------------------------- | :----- |
 | Storage Location	|Internal flash (NVS partition)	|External I2C FRAM/EEPROM chip	|I2CMiniPrefs avoids wearing down internal flash|
 |Write Endurance	|Limited (10k-100k cycles)	|FRAM: ~10¹⁴ cycles, EEPROM: 100k-1M cycles	|I2CMiniPrefs + FRAM is ideal for high-write scenarios|
-|Wear Leveling	Basic (sector-based)	|Advanced (block-based + GC)	|I2CMiniPrefs distributes writes more evenly|
+|Wear Leveling	|Basic (sector-based)	|Advanced (block-based + GC)	|I2CMiniPrefs distributes writes more evenly|
 |Garbage Collection	|Automatic (background)	|On-demand (during writes when block full)	|I2CMiniPrefs GC is explicit and configurable|
-|Max Key Length	|15 characters	Configurable (up to 255 bytes)	|I2CMiniPrefs offers more flexibility|
-|Max Value Size	|1984 bytes (single entry)	Configurable (limited by block size)	|I2CMiniPrefs block size is user-defined|
-|Data Types	Basic types + blobs	|Extended types (inc. 64-bit ints)	|I2CMiniPrefs supports more native types|
-|I2C Support	|❌ No	✅ Yes (core feature)	|I2CMiniPrefs requires external memory|
-|Write Speed	|Fast (~ms)	FRAM: Fast, EEPROM: Slow (5ms/byte)	|FRAM matches internal flash speed|
-|Memory Size	|Limited (typ. 1.5MB max)	Scalable (up to MBs with larger chips)	|I2CMiniPrefs supports larger memories|
-|Power Safety	|Good (journaled writes)	FRAM: Excellent, EEPROM: Good	|FRAM has instant writes without delays|
-|Custom Hardware	|❌ No	✅ Yes (pin selection, I2C params)	|I2CMiniPrefs is hardware-flexible|
-|Library Size	~10KB (core)	~3KB (lightweight)	|I2CMiniPrefs has smaller footprint|
+|Max Key Length	|15 characters	|Configurable (up to 255 bytes)	|I2CMiniPrefs offers more flexibility|
+|Max Value Size	|1984 bytes (single entry)	|Configurable (limited by block size)	|I2CMiniPrefs block size is user-defined|
+|Data Types	|Basic types + blobs	|Extended types (inc. 64-bit ints)	|I2CMiniPrefs supports more native types|
+|I2C Support	|❌ No	|✅ Yes (core feature)	|I2CMiniPrefs requires external memory|
+|Write Speed	|Fast (~ms)	|FRAM: Fast, EEPROM: Slow (5ms/byte)	|FRAM matches internal flash speed|
+|Memory Size	|Limited (typ. 1.5MB max)	|Scalable (up to MBs with larger chips)	|I2CMiniPrefs supports larger memories|
+|Power Safety	|Good (journaled writes)	|FRAM: Excellent, EEPROM: Good	|FRAM has instant writes without delays|
+|Custom Hardware	|❌ No	|✅ Yes (pin selection, I2C params)	|I2CMiniPrefs is hardware-flexible|
+|Library Size	|~10KB (core)	|~3KB (lightweight)	|I2CMiniPrefs has smaller footprint|
 
 When to Use Which
