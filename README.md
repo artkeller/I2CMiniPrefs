@@ -225,3 +225,29 @@ While both libraries provide key-value storage, they target different use cases 
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
+## 🤝 Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## ✨Key Comparison Highlights
+
+1. **Endurance & Hardware**:
+   - `Preferences.h` uses internal flash (limited writes)
+   - `I2CMiniPrefs` uses external FRAM (near-unlimited writes)
+
+2. **Wear Management**:
+   - `Preferences.h` has basic sector rotation
+   - `I2CMiniPrefs` implements advanced block rotation + garbage collection
+
+3. **Flexibility**:
+   - `Preferences.h` has fixed key/value limits
+   - `I2CMiniPrefs` offers fully configurable sizes
+
+4. **Performance**:
+   - `Preferences.h` has faster internal access
+   - `I2CMiniPrefs` with FRAM matches speed while preserving internal flash
+
+5. **Use Cases**:
+   - `Preferences.h` for static configs
+   - `I2CMiniPrefs` for high-write applications and large datasets
+
