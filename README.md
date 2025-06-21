@@ -154,3 +154,11 @@ size_t getBytes(const char* key, void* buf, size_t maxLen)
 ```
 
 For `getBytes`, `maxLen` is the maximum number of bytes to read into `buf`. It returns the number of bytes read, or 0 if the key is not found.
+
+#### Other Methods
+
+* `bool isKey(const char* key)`: Returns true if the key exists, false otherwise.
+* `bool remove(const char* key)`: Marks an entry as deleted. Its space will be reclaimed during the next garbage collection. Returns true on success.
+* `bool clear()`: Clears all stored preferences. This effectively formats the memory by triggering a full garbage collection and resetting the global header.
+
+
