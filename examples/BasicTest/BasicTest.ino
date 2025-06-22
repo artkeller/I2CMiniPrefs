@@ -119,7 +119,7 @@ void setup() {
   Serial.print("Temp Offset nach Entfernen (sollte Default sein): "); Serial.println(myPrefs.getFloat("tempOff", 99.9f)); // Confirm removal by reading default value
 
   // --- Example: Clearing All Settings ---
-  Serial.println("\n--- Loeche alle Einstellungen ---");
+  Serial.println("\n--- Loesche alle Einstellungen ---");
   myPrefs.clear(); // Clear all stored preferences
   Serial.print("Sensor ID nach Clear (sollte Default sein): "); Serial.println(myPrefs.getInt("sensorID", -1)); // Confirm default
   Serial.print("Device Name nach Clear (sollte Default sein): "); Serial.println(myPrefs.getString("devName", "NoName")); // Confirm default
