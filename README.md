@@ -12,7 +12,7 @@ The standard `Preferences.h` library provided for ESP32 is excellent for storing
 
 The `I2CMiniPrefs` library was developed to overcome this limitation by using external, I2C-connected **FRAM (ferroelectric random-access memory)** chips. FRAM offers significantly higher write endurance, making it ideal for high-frequency data persistence. For most practical applications, it has virtually unlimited endurance, with a typical range of $10^{12}$ to $10^{14}$ write cycles. Although it also supports EEPROM, which requires more careful handling due to its lower write endurance of typically $10^{9}$ write cycles, FRAM is the primary focus and recommended memory type for this library's design.
 
-The library implements a robust **wear-leveling mechanism** and a **garbage collection (GC)** system, ensuring that data is evenly distributed across the memory and deleted entries are reclaimed efficiently. This extends the effective lifespan of the external memory chip, especially beneficial for EEPROMs and further enhancing FRAM durability.
+The library implements robust **wear-leveling** and **garbage collection (GC)** mechanisms to ensure data is evenly distributed across memory and deleted entries are efficiently reclaimed. These features extend the effective lifespan of the external memory chip, which is especially beneficial for EEPROMs and enhances FRAM durability.
 
 Note: see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/nvs_flash.html#
 
