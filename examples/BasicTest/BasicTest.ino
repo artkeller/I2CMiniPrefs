@@ -36,7 +36,7 @@
  * debug messages related to USB_DM/DP, which might indicate pin conflicts
  * if USB JTAG/Serial is active. Ensure these pins are exclusively used for I2C.
  */
-I2CMiniPrefs myPrefs(MEM_TYPE_FRAM, 0x50, 256 * 1024, 128, 8, 120, 8, 9); 
+I2CMiniPrefs myPrefs(MEM_TYPE_FRAM, 0x50, 256 * 1024, 128, 8, 120); // Default GPIO8/9 ESP32C3
 
 /**
  * @brief Alternative I2CMiniPrefs instance using custom I2C pins (e.g., GPIO4 and GPIO5) for ESP32-C3.
