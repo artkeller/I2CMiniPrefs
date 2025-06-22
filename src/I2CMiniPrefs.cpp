@@ -1,6 +1,10 @@
 /**
  * @file I2CMiniPrefs.cpp
  * @brief Implementation of wear-leveling key-value storage for I2C memories
+ * 
+ * @author Thomas Walloschke mailto:artkeller@gmx.de
+ * @date 2025-06-21
+ * @version 1.0.0
  */
 
 #include "I2CMiniPrefs.h"

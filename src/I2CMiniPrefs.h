@@ -1,6 +1,10 @@
 /**
  * @file I2CMiniPrefs.h
  * @brief Lightweight key-value storage for I2C FRAM/EEPROM with wear-leveling
+ * 
+ * @author Thomas Walloschke mailto:artkeller@gmx.de
+ * @date 2025-06-21
+ * @version 1.0.0
  */
 
 #pragma once
